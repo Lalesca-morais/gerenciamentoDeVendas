@@ -48,7 +48,7 @@ class VendaService {
             e.printStackTrace()
         }
     }
-    fun alterarVenda(id_venda: Int, qtd_produto: Int) { TODO("fazer alterações")
+    fun atualizarVenda(id_venda: Int, qtd_produto: Int) {
         try {
             val verificaVenda = "SELECT COUNT(*) AS total FROM venda WHERE id_venda = $id_venda"
             val statementVerifica = connection.createStatement()

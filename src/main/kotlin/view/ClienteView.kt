@@ -5,7 +5,7 @@ import service.ClienteService
 class ClienteView {
 
 
-    fun MenuAluno() {
+    fun MenuCliente() {
         println("\n=====MENU DO CLIENTE=====\n")
         println("Digite uma das seguinte opções")
         println("1 - Adicinar Cliente.")
@@ -16,9 +16,10 @@ class ClienteView {
         println("6 - Voltar ao menu principal.")
     }
 
-    fun opcoesAluno() {
+    fun opcoesCliente() {
         var option = 0
         do {
+            MenuCliente()
             if (option != 6) {
                 MenuView()
             }
@@ -42,18 +43,23 @@ class ClienteView {
                 }
 
                 3 -> {
-                    println("Digite o ID para deletar um cliente: ")
+                    println("Para atualizar, digite o ID do cliente que deseja atualizar: ")
                     val idCliente = readln().toInt()
+                    println("Para atualizar, digite o e-mail do cliente que deseja atualizar: ")
+                    val emailCliente = readln()
+                    println("Para atualizar, digite o endereco do cliente que deseja atualizar: ")
+                    val enderecoCliente = readln()
+                    ClienteService.atualizarCliente(idCliente, emailCliente, enderecoCliente)
                 }
 
-                4 -> {
-                    alunoService.listarAlunos()
-                }
+                4 -> ClienteService.consultaTodosOsCliente()
+
 
                 5 -> {
-                    MenuView().MenuPrincipal()
+                    println("Digite o ID do cliente que deseja listar: ")
+                    val idCliente = readln().toInt()
+                    ClienteService.consultarClientePorId(idCliente)
                 }
-
                 else -> {
                     println("Opção inválida, tente novamente!")
                 }
