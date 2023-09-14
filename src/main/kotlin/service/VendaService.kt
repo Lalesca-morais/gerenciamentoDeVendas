@@ -5,7 +5,6 @@ import java.sql.SQLException
 
 class VendaService {
     private var connection = Conexao().fazerConexao()
-
     fun inserirVenda(clienteid: Int, vendedorid: Int, produtoid: Int, valortotal: Int) {
         var vendasAdicionadas = false
 
