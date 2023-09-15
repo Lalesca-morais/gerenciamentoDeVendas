@@ -12,7 +12,8 @@ class VendedorView {
             println("3 - Atualizar Vendedor.")
             println("4 - Listar Vendedores.")
             println("5 - Buscar Vendedor por ID")
-            println("6 - Voltar ao menu principal.")
+            println("6 - Salário dos vendedores de forma decrescente")
+            println("7 - Voltar ao menu principal.")
             opcao = readln().toIntOrNull() ?: 0
         }
         fun opcoesVendedor() {
@@ -66,14 +67,14 @@ class VendedorView {
                         val idVendedor = readln().toInt()
                         VendedorService.consultarVendedorPorId(idVendedor)
                     }
-                    6 -> {
+                    6 -> VendedorService.mostrarSalarioDosVendedoresDecrescente()
+                    7 -> {
                         println("Voltando ao menu principal...")
                         MenuView.escolhaPrincipal()
                     }
                     else -> println("Opção inválida, tente novamente!")
-
                 }
-            }while (opcao != 6)
+            }while (opcao != 7)
         }
     }
 }

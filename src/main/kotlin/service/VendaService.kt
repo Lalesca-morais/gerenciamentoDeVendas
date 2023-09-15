@@ -6,35 +6,8 @@ import java.sql.SQLException
 class VendaService {
     companion object {
         private var connection = Conexao().fazerConexao()
-        fun adicionarColunaQuantidade() {
-            try {
-                val sql = """
-            ALTER TABLE venda
-            ADD quantidade INT;
-        """
-                val statement = connection.createStatement()
-                statement.executeUpdate(sql)
-                println("Coluna 'quantidade' adicionada com sucesso à tabela 'venda'!")
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            }
-        }
         fun inserirVenda(clienteid: Int?, vendedorid: Int?, produtoid: Int?, valortotal: Double?, quantidade: Int?) {
             try {
-                val verificaColuna = """
-            SELECT EXISTS (
-                SELECT 1
-                FROM information_schema.columns
-                WHERE table_name = 'venda' AND column_name = 'quantidade'
-            );
-        """
-                val statementVerificaColuna = connection.createStatement()
-                val resultSet = statementVerificaColuna.executeQuery(verificaColuna)
-                resultSet.next()
-                val colunaQuantidadeExiste = resultSet.getBoolean(1)
-                if (!colunaQuantidadeExiste) {
-                    adicionarColunaQuantidade()
-                }
                 val sql = """
             INSERT INTO venda (clienteid, vendedorid, produtoid, quantidade, valortotal)
             SELECT $clienteid, $vendedorid, $produtoid, $quantidade, Produto.preco_unit * $quantidade
@@ -44,7 +17,6 @@ class VendaService {
                 val statement = connection.createStatement()
                 statement.executeUpdate(sql)
                 println("Venda adicionada com sucesso!")
-
             } catch (e: SQLException) {
                 e.printStackTrace()
             }
@@ -114,7 +86,7 @@ class VendaService {
         fun consultarVendaPorId(id: Int) {
             try {
                 val statement = connection.createStatement()
-                val resultSet = statement.executeQuery("SELECT * FROM venda")
+                val resultSet = statement.executeQuery("SELECT * FROM venda WHERE id = $id")
 
                 if (resultSet.next()) {
                     println("=====VENDA ENCONTRADA=====")
@@ -137,7 +109,7 @@ class VendaService {
         SELECT Venda.id AS venda, Venda.valortotal AS preco
         FROM Venda
         WHERE valortotal > 10.00
-    """
+        """
             try {
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery(sql)
@@ -153,5 +125,22 @@ class VendaService {
                 e.printStackTrace()
             }
         }
+
+//        fun formatarValorNuloParaZero() {
+//            val sql = """
+//        UPDATE venda
+//        SET valortotal = 0.00, quantidade = 0.00
+//        WHERE valortotal IS NULL OR quantidade IS NULL
+//        """
+//            try {
+//                val statement = connection.createStatement()
+//                statement.executeUpdate(sql)
+//                println("Valores nulos de valor total e quantidade atualizados para zero com sucesso!")
+//                statement.close()
+//            } catch (e: SQLException) {
+//                e.printStackTrace()
+//            }
+//        }
+
     }
 }

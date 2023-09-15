@@ -13,7 +13,8 @@ class ClienteView {
             println("3 - Atualizar Cliente.")
             println("4 - Listar Clientes.")
             println("5 - Buscar Cliente por ID")
-            println("6 - Voltar ao menu principal.")
+            println("6 - Buscar cliente com o email zup.com.br")
+            println("7 - Voltar ao menu principal.")
             opcao = readln().toIntOrNull() ?: 0
         }
         fun opcoesCliente() {
@@ -51,13 +52,14 @@ class ClienteView {
                         val idCliente = readln().toInt()
                         ClienteService.consultarClientePorId(idCliente)
                     }
-                    6 -> {
+                    6 -> ClienteService.clientesComEmailZup()
+                    7 -> {
                         println("Voltando ao menu principal...")
                         MenuView.escolhaPrincipal()
                     }
                     else -> println("Opção inválida, tente novamente!")
                 }
-            }while (opcao != 6)
+            }while (opcao != 7)
         }
     }
 }

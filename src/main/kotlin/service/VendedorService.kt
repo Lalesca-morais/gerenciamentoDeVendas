@@ -61,7 +61,6 @@ class VendedorService {
                 e.printStackTrace()
             }
         }
-
         fun deletarVendedor(id: Int) {
             try {
                 val statement = connection.createStatement()
@@ -91,6 +90,22 @@ class VendedorService {
                 } else {
                     println("Vendedor com ID $id não encontrado, tente novamente")
                 }
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
+        }
+        fun mostrarSalarioDosVendedoresDecrescente() {
+            val sql = "SELECT salario FROM vendedor ORDER BY salario DESC"
+            try {
+                val statement = connection.createStatement()
+                val resultSet = statement.executeQuery(sql)
+                println("=====SALÁRIO DOS VENDEDORES=====")
+                while (resultSet.next()) {
+                    val salario = resultSet.getDouble("salario")
+                    println("Salário: $salario")
+                }
+                resultSet.close()
+                statement.close()
             } catch (e: SQLException) {
                 e.printStackTrace()
             }

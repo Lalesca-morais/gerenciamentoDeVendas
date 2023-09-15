@@ -9,8 +9,7 @@ class MenuView {
             println("2 - Área para Vendedor")
             println("3 - Área para Venda")
             println("4 - Área para Produto")
-            println("5 - Outros")
-            println("6 - Sair.")
+            println("5 - Sair.")
             println("Digite a opção desejada!")
             opcao = readln().toIntOrNull() ?: 0
         }
@@ -21,10 +20,7 @@ class MenuView {
                 2 -> VendedorView.opcoesVendedor()
                 3 -> VendaView.opcoesVenda()
                 4 -> ProdutoView.opcoesProduto()
-                5 -> {
-                    //outrasOpcoes()
-                }
-                6 -> println("Saindo do sistema...")
+                5 -> println("Saindo do sistema...")
                 else -> println("Opção inválida, tente novamente!")
             }
         }
