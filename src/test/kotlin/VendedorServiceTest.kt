@@ -14,7 +14,7 @@ class VendedorServiceTest {
     @BeforeAll
     fun setUp() {
         connection = mock(Connection::class.java)
-        vendedorService.connection = connection
+        VendedorService.connection = connection
     }
     @Test
     fun testInserirVendedor() {
