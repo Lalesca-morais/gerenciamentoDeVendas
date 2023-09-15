@@ -7,17 +7,13 @@ class ProdutoService {
     companion object {
         private var connection = Conexao().fazerConexao()
         fun inserirProduto(nome: String, preco_unit: String) {
-            var clientesAdicionados = false
             try {
-                val sql = "INSERT INTO produto (nome, preco_unit) " +
+                val sql = "INSERT INTO produto (nome_produto, preco_unit) " +
                         "VALUES ('$nome', '$preco_unit')"
                 val statement = connection.createStatement()
                 statement.executeUpdate(sql)
                 println("Produto $nome adicionado com sucesso!")
 
-                if (!clientesAdicionados) {
-                    println("Não foi cadastrado nenhum produto, verifique se as informações estão corretas!")
-                }
             } catch (e: SQLException) {
                 e.printStackTrace()
             }
@@ -31,7 +27,7 @@ class ProdutoService {
                     produtosEncontrados = true
                     println(
                         "ID: " + resultSet.getInt("id_produto") +
-                                " | NOME: " + resultSet.getString("nome") +
+                                " | NOME: " + resultSet.getString("nome_produto") +
                                 " | PREÇO UNITÁRIO: " + resultSet.getString("preco_unit")
                     )
                 }
@@ -46,7 +42,7 @@ class ProdutoService {
             try {
                 val statement = connection.createStatement()
                 val rowCount = statement.executeUpdate(
-                    "UPDATE produto SET preco_unit = $preco_unit, WHERE id = $id")
+                    "UPDATE produto SET preco_unit = $preco_unit WHERE id_produto = $id ")
 
                 if (rowCount > 0) {
                     println("Produto com o ID $id foi alterado com sucesso.")
@@ -57,10 +53,9 @@ class ProdutoService {
                 e.printStackTrace()
             }
         }
-
         fun deletarProduto(id: Int) {
             val statement = connection.createStatement()
-            val rowCount = statement.executeUpdate("DELETE FROM cliente WHERE id = $id")
+            val rowCount = statement.executeUpdate("DELETE FROM produto WHERE id_produto = $id")
 
             try {
                 if (rowCount > 0) {
@@ -72,17 +67,16 @@ class ProdutoService {
                 e.printStackTrace()
             }
         }
-
         fun consultarProdutoPorId(id: Int) {
             try {
                 val statement = connection.createStatement()
-                val resultSet = statement.executeQuery("SELECT * FROM produto")
+                val resultSet = statement.executeQuery("SELECT * FROM produto WHERE id_produto = $id")
 
                 if (resultSet.next()) {
                     println("=====PRODUTO ENCONTRADO=====")
                     println(
                         "ID: " + resultSet.getInt("id_produto") +
-                                " | NOME: " + resultSet.getString("nome") +
+                                " | NOME: " + resultSet.getString("nome_produto") +
                                 " | PREÇO UNITÁRIO: " + resultSet.getString("preco_unit")
                     )
                 } else {

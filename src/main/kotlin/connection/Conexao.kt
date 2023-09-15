@@ -10,11 +10,6 @@ class Conexao {
             val url = "jdbc:postgresql://localhost:5432/vendas"
             val connection = DriverManager.getConnection(url, "postgres", "1234")
 
-            if (connection != null) {
-                println("Conexão deu certo!")
-            } else {
-                println("Conexão deu errado!")
-            }
             connection
         } catch (e: SQLException) {
             e.printStackTrace()
