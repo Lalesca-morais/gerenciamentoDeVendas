@@ -42,7 +42,7 @@ class ProdutoService {
             try {
                 val statement = connection.createStatement()
                 val rowCount = statement.executeUpdate(
-                    "UPDATE produto SET preco_unit = $preco_unit WHERE id_produto = $id ")
+                    "UPDATE produto SET preco_unit = $preco_unit WHERE id_produto = $id")
 
                 if (rowCount > 0) {
                     println("Produto com o ID $id foi alterado com sucesso.")

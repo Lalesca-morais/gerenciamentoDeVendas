@@ -77,7 +77,7 @@ class VendedorService {
         fun consultarVendedorPorId(id: Int) {
             try {
                 val statement = connection.createStatement()
-                val resultSet = statement.executeQuery("SELECT * FROM vendedor")
+                val resultSet = statement.executeQuery("SELECT * FROM vendedor WHERE id_vendedor = $id")
                 if (resultSet.next()) {
                     println("=====VENDEDOR ENCONTRADO=====")
                     println(
