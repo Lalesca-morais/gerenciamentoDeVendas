@@ -1,6 +1,5 @@
 package view
 
-import service.ClienteService
 import service.ProdutoService
 
 class ProdutoView {
@@ -17,7 +16,6 @@ class ProdutoView {
             println("6 - Voltar ao menu principal.")
             opcao = readln().toIntOrNull() ?: 0
         }
-
         fun opcoesProduto() {
             do {
                 MenuProduto()

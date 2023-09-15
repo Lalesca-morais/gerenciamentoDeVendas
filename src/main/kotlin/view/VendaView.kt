@@ -13,7 +13,8 @@ class VendaView {
             println("3 - Atualizar Venda.")
             println("4 - Listar Vendas.")
             println("5 - Buscar Venda por ID")
-            println("6 - Voltar ao menu principal.")
+            println("6 - Itens que foram vendidos acima de 10,00")
+            println("7 - Voltar ao menu principal.")
             opcao = readln().toIntOrNull() ?: 0
         }
         fun opcoesVenda() {
@@ -48,6 +49,13 @@ class VendaView {
                         println("Digite o ID da venda que deseja listar: ")
                         val idVenda = readln().toInt()
                         VendaService.consultarVendaPorId(idVenda)
+                    }
+                    6 ->{
+
+                    }
+                    7 -> {
+                        println("Voltando ao menu principal...")
+                        MenuView.escolhaPrincipal()
                     }
                     else -> println("Opção inválida, tente novamente!")
                 }
