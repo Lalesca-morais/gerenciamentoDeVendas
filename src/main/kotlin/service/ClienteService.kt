@@ -1,6 +1,7 @@
 package service
 
 import connection.Conexao
+import java.sql.Connection
 import java.sql.SQLException
 
 class ClienteService {

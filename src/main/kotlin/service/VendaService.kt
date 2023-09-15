@@ -125,21 +125,5 @@ class VendaService {
                 e.printStackTrace()
             }
         }
-
-//        fun formatarValorNuloParaZero() {
-//            val sql = """
-//        UPDATE venda
-//        SET valortotal = 0.00, quantidade = 0.00
-//        WHERE valortotal IS NULL OR quantidade IS NULL
-//        """
-//            try {
-//                val statement = connection.createStatement()
-//                statement.executeUpdate(sql)
-//                println("Valores nulos de valor total e quantidade atualizados para zero com sucesso!")
-//                statement.close()
-//            } catch (e: SQLException) {
-//                e.printStackTrace()
-//            }
-//        }
     }
 }
