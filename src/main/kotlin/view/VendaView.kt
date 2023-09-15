@@ -28,9 +28,11 @@ class VendaView {
                         val idVendedor = readln().toInt()
                         println("Digite o ID do produto da sua venda: ")
                         val idProduto = readln().toInt()
+                        println("Digite a quantidade de produtos que deseja comprar: ")
+                        val quantidade = readln().toInt()
                         println("Digite o valor total da sua venda: ")
-                        val valorTotal = readln().toInt()
-                        VendaService.inserirVenda(idCliente, idVendedor, idProduto, valorTotal)
+                        val valorTotal = readln().replace(',', '.').toDoubleOrNull() ?: 0.0
+                        VendaService.inserirVenda(idCliente, idVendedor, idProduto, valorTotal, quantidade)
                     }
                     2 -> {
                         println("Digite o ID para deletar uma venda: ")
@@ -50,16 +52,14 @@ class VendaView {
                         val idVenda = readln().toInt()
                         VendaService.consultarVendaPorId(idVenda)
                     }
-                    6 ->{
-
-                    }
+                    6 -> VendaService.listarItensVendidosAcimaDe10()
                     7 -> {
                         println("Voltando ao menu principal...")
                         MenuView.escolhaPrincipal()
                     }
                     else -> println("Opção inválida, tente novamente!")
                 }
-            }while (opcao != 6)
+            }while (opcao != 7)
         }
     }
 }
